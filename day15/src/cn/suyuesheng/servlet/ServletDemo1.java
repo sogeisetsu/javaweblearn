@@ -1,6 +1,7 @@
 package cn.suyuesheng.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,5 +12,22 @@ import java.io.IOException;
 public class ServletDemo1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("正常---post");
+        System.out.println(request.getRequestURL().toString());
+        System.out.println(request.getContextPath());
+        System.out.println("重定向");
+//        resp.setStatus(302);
+//        resp.setHeader("location","ServletDemo2");
+        //第二种方法重定向
+        //虚拟目录用req.getContextPath()来表示
+        response.sendRedirect(request.getContextPath()+"/ServletDemo2");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
+        ServletOutputStream servletOutputStream=resp.getOutputStream();
+        servletOutputStream.print("hellolllll");
+        servletOutputStream.write("你号".getBytes());
+
     }
 }
