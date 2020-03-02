@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <script>
+        window.onload=function () {
+            document.getElementById("mg").onclick=function () {
+                var date = new Date().getTime();
+                this.src="CheckOutDemo"+"?"+date;
+            }
+        }
+    </script>
+    <style>
+        #delsion{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<img src="CheckOutDemo" id="mg">
+<p id="delsion">看不清楚请双击图片……</p>
+</body>
+</html>

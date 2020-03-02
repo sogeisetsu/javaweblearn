@@ -27,7 +27,7 @@ public class ServletDemo1 extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         ServletOutputStream servletOutputStream=resp.getOutputStream();
         servletOutputStream.print("hellolllll");
-        servletOutputStream.write("你号".getBytes());
+        servletOutputStream.write("你号".getBytes("utf-8"));
 
     }
 }
