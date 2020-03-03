@@ -55,5 +55,7 @@ public class ServletCheckOutDemo extends HttpServlet {
         //显示图片
         ImageIO.write(img, "jpg", response.getOutputStream());
         System.out.println(stringBuffer);
+        Object name = this.getServletContext().getAttribute("name");
+        System.out.println((String)name);
     }
 }
