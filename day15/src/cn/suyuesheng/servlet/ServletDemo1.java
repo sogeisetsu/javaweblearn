@@ -1,5 +1,6 @@
 package cn.suyuesheng.servlet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -25,9 +26,14 @@ public class ServletDemo1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
+        System.out.println(resp.getCharacterEncoding());
+        resp.setCharacterEncoding("utf-8");
         ServletOutputStream servletOutputStream=resp.getOutputStream();
-        servletOutputStream.print("hellolllll");
+        servletOutputStream.print("hahahaha");
         servletOutputStream.write("你号".getBytes("utf-8"));
+        ServletContext context = this.getServletContext();
+        Object name = context.getAttribute("name");
+        System.out.println((String) name);
 
     }
 }
