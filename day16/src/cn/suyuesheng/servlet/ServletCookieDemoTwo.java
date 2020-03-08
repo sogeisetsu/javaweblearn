@@ -24,7 +24,7 @@ public class ServletCookieDemoTwo extends HttpServlet {
         }
         System.out.println(">----------------------通过header来获取cookie");
         String cookieFromHeader = request.getHeader("Cookie");
-        //get方式获取头数据，先解码ISO-8859-1  再编码utf-8
+        //get方式获取头数据，先编码ISO-8859-1 再解码utf-8
         cookieFromHeader = new String(cookieFromHeader.getBytes("ISO-8859-1"),"utf-8");
         System.out.println(cookieFromHeader);
         System.out.println(">----------------------------------------");

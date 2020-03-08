@@ -24,6 +24,7 @@ public class ServletCookieDemoOne extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //创建cookie
         Cookie cookie = new Cookie("msg", "你好");
+        cookie.setMaxAge(-1);
         //response响应Cookie
         response.addCookie(cookie);
     }
