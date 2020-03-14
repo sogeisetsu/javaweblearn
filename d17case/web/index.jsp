@@ -21,15 +21,18 @@
   <!-- 3. 导入bootstrap的js文件 -->
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
+
   </script>
 </head>
 <body>
 <div align="center">
   <a
-          href="ServletIndex" style="text-decoration:none;font-size:33px">查询所有用户信息
+          href="ServletFindUserByPage?currentPage=1&rows=5" style="text-decoration:none;font-size:33px">查询所有用户信息
   </a>
 </div>
-<br>
-${pageContext.request.getAttribute("list")}
+<div>
+  <h3 align="center" style="font-weight: bolder;font-family: Monaco">欢迎你！${user.name}！</h3>
+  <h3 align="center" style="font-weight: bold;font-family: 'Microsoft YaHei UI'" >welcome!!!&nbsp;&nbsp;${user.name}！いらっしゃい</h3>
+</div>
 </body>
 </html>

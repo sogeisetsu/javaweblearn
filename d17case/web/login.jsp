@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -57,11 +58,14 @@
     </form>
 
     <!-- 出错显示的信息框 -->
+    <c:if test="${loginError!=null}">
     <div class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" >
             <span>&times;</span></button>
-        <strong>登录失败!</strong>
+        <strong>${loginError}</strong>
     </div>
+    </c:if>
+
 </div>
 </body>
 </html>

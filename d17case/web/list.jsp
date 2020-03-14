@@ -33,60 +33,142 @@
             text-align: center;
         }
     </style>
+    <script>
+        function del(id) {
+            if(confirm("确定要删除吗？") == true){
+                location.href="${pageContext.request.contextPath}/ServletDeleteById?id="+id;
+            }
+        }
+        window.onload=function () {
+            document.getElementById("firstCb").onclick=function(){ //全选
+                var elementsByName = document.getElementsByName("uid");
+                for(var i =0;i<elementsByName.length;i++){
+                    elementsByName[i].checked=this.checked;
+                }
+            };
 
+            document.getElementById("del").onclick=function () { //选择
+                var elementsByName = document.getElementsByName("uid");
+                var flag=false;
+                for(var i =0;i<elementsByName.length;i++){
+                    if(elementsByName[i].checked){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(flag){
+                    document.getElementById("form").submit();
+                }
+            }
+            document.getElementById("showAll").onclick=function () {
+                location.href="${pageContext.request.contextPath}/ServletFindUserByPage?currentPage=1&rows=5"
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container">
     <h3 style="text-align: center">用户信息列表</h3>
     <div style="margin-bottom: 20px;height: 30px">
         <div style="float: left">
-            <form class="form-inline">
+            <form class="form-inline" action="${pageContext.request.contextPath}/ServletFindUserByPage?currentPage=1&rows=5" method="post">
                 <div class="form-group">
                     <label for="exampleInputName2">姓名</label>
-                    <input type="text" class="form-control" id="exampleInputName2" >
+                    <input type="text" class="form-control" id="exampleInputName2" name="name" value="${name}">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail2">籍贯</label>
-                    <input type="email" class="form-control" id="exampleInputEmail2" >
+                    <label for="exampleInputName1">籍贯</label>
+                    <input type="text" class="form-control" id="exampleInputName1"  name="address" value="${address}" >
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName2">E-mail</label>
-                    <input type="text" class="form-control" id="exampleInputName3">
+                    <input type="text" class="form-control" id="exampleInputName3" name="email" value="${email}" >
                 </div>
                 <button type="submit" class="btn btn-default">查询</button>
+                <button type="button" class="btn btn-default" id="showAll" >显示全部</button>
             </form>
         </div>
         <div style="float: right">
-            <a class="btn btn-primary" href="add.html">添加联系人</a>
-            <a class="btn btn-primary" href="">删除选中联系人</a>
+            <a class="btn btn-primary" href="add.jsp">添加联系人</a>
+            <a class="btn btn-primary"  id="del" href="javascript:void(0)">删除选中联系人</a>
         </div>
     </div>
-    <table border="1" class="table table-bordered table-hover" style="margin-top: 20px">
-        <tr class="success">
-            <th>选择</th>
-            <th>编号</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>年龄</th>
-            <th>籍贯</th>
-            <th>QQ</th>
-            <th>邮箱</th>
-            <th>操作</th>
-        </tr>
-        <c:forEach items="${pageContext.request.getAttribute('list')}" var="item" varStatus="s">
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.gender}</td>
-                <td>${item.age}</td>
-                <td>${item.address}</td>
-                <td>${item.qq}</td>
-                <td>${item.email}</td>
-                <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+    <form id="form" method="post" action="ServletDelSelect">
+        <table border="1" class="table table-bordered table-hover" style="margin-top: 20px">
+            <tr class="success">
+                <th><input type="checkbox" id="firstCb">全选</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>籍贯</th>
+                <th>QQ</th>
+                <th>邮箱</th>
+                <th>操作</th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${BeanPage.list}" var="item" varStatus="s">
+                <tr>
+                    <td><input type="checkbox" value="${item.id}" name="uid"></td>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.gender}</td>
+                    <td>${item.age}</td>
+                    <td>${item.address}</td>
+                    <td>${item.qq}</td>
+                    <td>${item.email}</td>
+                    <td><a class="btn btn-default btn-sm"
+                           href="${pageContext.request.contextPath}/ServletFindUser?id=${item.id}">修改</a>&nbsp;<a
+                            class="btn btn-default btn-sm" href="javascript:del(${item.id});">删除</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </form>
+</div>
+<div>
+    <c:if test="${deleteError!=null}">
+        <h2 style="text-align: center;color: red;">${deleteError}</h2>
+    </c:if>
+    <c:if test="${deleteSelectError!=null}">
+        <h2 style="text-align: center;color: red;">${deleteSelectError}</h2>
+    </c:if>
+</div>
+<div class="container" align="center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-lg">
+            <c:if test="${BeanPage.currentPage==1}">
+                <li class="disabled">
+            </c:if>
+            <c:if test="${BeanPage.currentPage!=1}">
+                <li>
+            </c:if>
+                <a href="${pageContext.request.contextPath}/ServletFindUserByPage?currentPage=${BeanPage.currentPage-1}&rows=5&name=${name}&address=${address}&email=${email}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <c:forEach begin="1" end="${BeanPage.totalPage}" var="i" varStatus="s">
+                <c:if test="${BeanPage.currentPage==i}">
+                    <li class="active"><a href="${pageContext.request.contextPath}/ServletFindUserByPage?currentPage=${i}&rows=5&name=${name}&address=${address}&email=${email}">${i}</a></li>
+                </c:if>
+                <c:if test="${BeanPage.currentPage!=i}">
+                    <li><a href="${pageContext.request.contextPath}/ServletFindUserByPage?currentPage=${i}&rows=5&name=${name}&address=${address}&email=${email}">${i}</a></li>
+                </c:if>
+            </c:forEach>
+            <c:if test="${BeanPage.currentPage==BeanPage.totalPage}">
+                <li class="disabled">
+            </c:if>
+            <c:if test="${BeanPage.currentPage!=BeanPage.totalPage}">
+                <li>
+            </c:if>
+                <a href="${pageContext.request.contextPath}/ServletFindUserByPage?currentPage=${BeanPage.currentPage+1}&rows=5&name=${name}&address=${address}&email=${email}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <span style="font-family: Monaco;font-size: large;vertical-align: middle;line-height: 46px;font-weight: bolder;margin-left: 20px">
+                共有${BeanPage.totalCount}个用户，分成了${BeanPage.totalPage}页显示
+            </span>
+        </ul>
+    </nav>
+
 </div>
 </body>
 </html>

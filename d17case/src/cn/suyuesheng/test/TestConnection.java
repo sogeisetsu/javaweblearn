@@ -118,4 +118,25 @@ public class TestConnection {
             e.printStackTrace();
         }
     }
+    @Test
+    public void testAdd(){
+        User user = new User();
+        user.setName("lk");
+        user.setGender("man");
+        try {
+            Boolean aBoolean = DomainFectory.getUserService().addUser(user);
+            System.out.println(aBoolean);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testDelete(){
+        try {
+            Boolean delete = DomainFectory.getUserService().delete(12);
+            System.out.println(delete);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

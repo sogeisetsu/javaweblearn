@@ -3,6 +3,7 @@ package cn.suyuesheng.dao;
 import cn.suyuesheng.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据访问层接口
@@ -64,4 +65,39 @@ public interface IUserDao {
      */
     public User findByNameAndFindByPassword(String name ,String password) throws Exception;
     public List<User> findByNameAndFindByAddressAndFindByEmail(String name,String address,String email) throws Exception;
+
+    /**
+     * 添加用户不考虑用户是否存在的问题
+     * @param user
+     * @return Boolean
+     * @throws Exception
+     */
+    public Boolean addUser(User user) throws Exception;
+    public User findByName(String name) throws Exception;
+
+    /**
+     * 根据id删除user
+     * @param id
+     * @return 删除成功返回true
+     * @throws Exception
+     */
+    public Boolean deleteById(Integer id) throws Exception;
+
+    /**
+     * 返回总员工数
+     * @return
+     * @throws Exception
+     * @param map
+     */
+    public int totalCount(Map<String, String[]> map) throws Exception;
+
+    /**
+     * 返回某一页的user集合
+     * @param start
+     * @param end
+     * @param map
+     * @return
+     * @throws Exception
+     */
+    public List<User> findByPage(int start, int end, Map<String, String[]> map) throws Exception;
 }

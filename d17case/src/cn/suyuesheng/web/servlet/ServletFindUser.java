@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/ServletIndex")
-public class ServletIndex extends HttpServlet {
+@WebServlet("/ServletFindUser")
+public class ServletFindUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charSet=utf-8");
         //看是否登录
         Object userlogin = request.getSession().getAttribute("user");
         if(userlogin==null){
@@ -23,15 +21,19 @@ public class ServletIndex extends HttpServlet {
             request.setAttribute("loginError", "还没有登录,您没有相关权限");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
-        List<User> all= null;
+        User user=null;
         try {
-            all = DomainFectory.getUserService().findAll();
+            user = DomainFectory.getUserService().findById(Integer.parseInt(request.getParameter("id")));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.setAttribute("list", all);
-//        System.out.println(all);
-        request.getRequestDispatcher("/list.jsp").forward(request, response);
+        if(user!=null){
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("/update.jsp").forward(request, response);
+        }else{
+            request.setAttribute("updateError", "没有查找到相关的用户，请刷新");
+            request.getRequestDispatcher("/update.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

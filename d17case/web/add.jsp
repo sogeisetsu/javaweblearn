@@ -1,3 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 苏月晟
+  Date: 2020/3/13
+  Time: 2:14
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- HTML5文档-->
 <!DOCTYPE html>
 <!-- 网页使用的语言 -->
@@ -32,8 +41,8 @@
 
         <div class="form-group">
             <label>性别：</label>
-            <input type="radio" name="sex" value="男" checked="checked"/>男
-            <input type="radio" name="sex" value="女"/>女
+            <input type="radio" name="gender" value="man" checked="checked"/>男
+            <input type="radio" name="gender" value="woman"/>女
         </div>
 
         <div class="form-group">
@@ -43,10 +52,14 @@
 
         <div class="form-group">
             <label for="address">籍贯：</label>
-            <select name="address" class="form-control" id="jiguan">
-                <option value="广东">广东</option>
-                <option value="广西">广西</option>
-                <option value="湖南">湖南</option>
+            <select name="address" class="form-control" id="address">
+                <option value="陕西">陕西</option>
+                <option value="北京">北京</option>
+                <option value="上海">上海</option>
+                <option value="济南">济南</option>
+                <option value="广州">广州</option>
+                <option value="london">英国伦敦</option>
+                <option value="日本です">日本</option>
             </select>
         </div>
 
@@ -66,6 +79,11 @@
             <input class="btn btn-default" type="button" value="返回" />
         </div>
     </form>
+</div>
+<div>
+    <c:if test="${addError!=null}">
+        <h2 style="color: red;text-align: center">${addError}</h2>
+    </c:if>
 </div>
 </body>
 </html>

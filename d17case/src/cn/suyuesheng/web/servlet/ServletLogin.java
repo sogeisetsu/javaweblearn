@@ -17,6 +17,7 @@ import java.util.Map;
 public class ServletLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+
         //获取验证码
         String verifycode = request.getParameter("verifycode");
         Object checkCodee = request.getSession().getAttribute("checkCode");
@@ -27,7 +28,7 @@ public class ServletLogin extends HttpServlet {
         if(checkCode!=null&&checkCode.equalsIgnoreCase(verifycode)){
             System.out.println("验证码输入正确");
         }else{
-            request.setAttribute("error_check_code", "error");
+            request.setAttribute("loginError", "error  验证码错误");
             System.out.println("checkCodeError");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;

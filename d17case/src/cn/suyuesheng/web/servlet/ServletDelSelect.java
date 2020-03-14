@@ -1,6 +1,5 @@
 package cn.suyuesheng.web.servlet;
 
-import cn.suyuesheng.domain.User;
 import cn.suyuesheng.util.fectory.DomainFectory;
 
 import javax.servlet.ServletException;
@@ -9,13 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/ServletIndex")
-public class ServletIndex extends HttpServlet {
+@WebServlet("/ServletDelSelect")
+public class ServletDelSelect extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charSet=utf-8");
         //看是否登录
         Object userlogin = request.getSession().getAttribute("user");
         if(userlogin==null){
@@ -23,15 +20,23 @@ public class ServletIndex extends HttpServlet {
             request.setAttribute("loginError", "还没有登录,您没有相关权限");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
-        List<User> all= null;
+        String[] uids = request.getParameterValues("uid");
+//        for(String uid :uids){
+//            System.out.println(uid);
+//        }
+        Boolean aBoolean=null;
         try {
-            all = DomainFectory.getUserService().findAll();
+            aBoolean = DomainFectory.getUserService().deleteByIds(uids);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.setAttribute("list", all);
-//        System.out.println(all);
-        request.getRequestDispatcher("/list.jsp").forward(request, response);
+        if(aBoolean){
+            //全部删除成功
+            response.sendRedirect(request.getContextPath()+"/ServletFindUserByPage");
+        }else{
+            request.setAttribute("deleteSelectError", "出错，部分或全部未删除干净");
+            request.getRequestDispatcher("/ServletIndex").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
