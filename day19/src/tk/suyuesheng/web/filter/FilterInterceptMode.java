@@ -16,11 +16,11 @@ public class FilterInterceptMode implements Filter {
     //重定向来的也会被拦截
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-        System.out.println("进入  FilterInterceptModeTestFILTER");
+//        System.out.println("进入  FilterInterceptModeTestFILTER");
         chain.doFilter(request, response);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         String format = dateFormat.format(new Date());
-        System.out.println("被拦截成功>------------------------------------"+format);
+//        System.out.println("被拦截成功>------------------------------------"+format);
     }
 
     public void init(FilterConfig config) throws ServletException {

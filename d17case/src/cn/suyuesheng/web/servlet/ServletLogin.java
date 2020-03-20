@@ -6,6 +6,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,6 +62,9 @@ public class ServletLogin extends HttpServlet {
                 e.printStackTrace();
             }
             request.getSession().setAttribute("user", login1);
+            Cookie cookie = new Cookie("JSESSIONID", request.getSession().getId());
+            cookie.setMaxAge(60*60*30);
+            response.addCookie(cookie);
             response.sendRedirect(request.getContextPath()+"/index.jsp");
         }else {
             request.setAttribute("loginError", "用户名或密码错误");

@@ -17,6 +17,11 @@
   <%
     out.print("hello");
   %>
-
+  <%
+    String name = request.getParameter("name");
+    out.print(name);
+    String requestURI = request.getRequestURI();
+    out.print("<br>"+requestURI);
+  %>
   </body>
 </html>
