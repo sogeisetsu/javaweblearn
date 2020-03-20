@@ -45,7 +45,7 @@
             function jj() {
                 document.getElementById("time_out_number").innerHTML= --innerText;
                 if(innerText==0){
-                    window.open("http://localhost/day17/","_self")
+                    window.open("http://localhost/d17case/login.jsp","_self")
                 }
             }
             window.setInterval(jj,1000);

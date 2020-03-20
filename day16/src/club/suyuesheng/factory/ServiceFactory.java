@@ -1,7 +1,7 @@
-package suyuesheng.factory;
+package club.suyuesheng.factory;
 
-import suyuesheng.dbcserverce.IUserService;
-import suyuesheng.dbcserverce.impl.UserServiceImpl;
+import club.suyuesheng.dbcserverce.IUserService;
+import club.suyuesheng.dbcserverce.impl.UserServiceImpl;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**

@@ -1,4 +1,4 @@
-<%@ page import="suyuesheng.vo.User" %><%--
+<%@ page import="User" %><%--
   Created by IntelliJ IDEA.
   User: 苏月晟
   Date: 2020/3/8

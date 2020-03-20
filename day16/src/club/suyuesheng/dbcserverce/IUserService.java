@@ -1,6 +1,6 @@
-package suyuesheng.dbcserverce;
+package club.suyuesheng.dbcserverce;
 
-import suyuesheng.vo.User;
+import club.suyuesheng.vo.User;
 
 /**
  * 接口 User表数据库业务层接口

@@ -1,4 +1,4 @@
-package suyuesheng.dbc;
+package club.suyuesheng.dbc;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.springframework.jdbc.core.JdbcTemplate;

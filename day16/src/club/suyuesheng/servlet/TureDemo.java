@@ -1,4 +1,4 @@
-package suyuesheng.servlet;
+package club.suyuesheng.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

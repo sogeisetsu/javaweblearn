@@ -1,8 +1,8 @@
-package suyuesheng;
+package club.suyuesheng;
 
-import suyuesheng.dbc.DatabaseConnection;
-import suyuesheng.factory.ServiceFactory;
-import suyuesheng.vo.User;
+import club.suyuesheng.vo.User;
+import club.suyuesheng.dbc.DatabaseConnection;
+import club.suyuesheng.factory.ServiceFactory;
 
 public class Test {
     public static void main(String[] args) throws Exception {

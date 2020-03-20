@@ -1,4 +1,4 @@
-package suyuesheng.vo;
+package club.suyuesheng.vo;
 
 public class User {
     private int id;

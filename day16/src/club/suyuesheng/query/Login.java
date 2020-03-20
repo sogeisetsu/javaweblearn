@@ -1,8 +1,8 @@
-package suyuesheng.query;
+package club.suyuesheng.query;
 
-import suyuesheng.dbc.DatabaseConnection;
-import suyuesheng.factory.ServiceFactory;
-import suyuesheng.vo.User;
+import club.suyuesheng.dbc.DatabaseConnection;
+import club.suyuesheng.factory.ServiceFactory;
+import club.suyuesheng.vo.User;
 
 /**
  * 将获取的请求信息和数据库比对

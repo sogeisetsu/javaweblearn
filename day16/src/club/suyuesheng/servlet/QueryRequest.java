@@ -1,7 +1,7 @@
-package suyuesheng.servlet;
+package club.suyuesheng.servlet;
 
-import suyuesheng.query.Login;
-import suyuesheng.vo.User;
+import club.suyuesheng.query.Login;
+import club.suyuesheng.vo.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
