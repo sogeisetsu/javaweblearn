@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>two</title>
+    <script src="../js/jquery-1.11.0.js"></script>
+</head>
+<body>
+<h2 class="h">hello world</h2>
+<h3 class="h">hhhhhhihi</h3>
+<p><span class="h" style="color:rebeccapurple;">这是</span>p</p>
+<input id="but" type="button" value="点击">
+<input id="pu" type="button" value="cc">
+<script>
+    $(function () {//加载完之后在整script
+        $('#but').click(function () {//事件
+            alert("点击")
+        });
+        $('h2').html("修改h2");
+        $($('.h')[1]).html('js对象转换为jq');
+        $('.h')[2].style.color='red'; //jq对象转化成js
+        $($('.h')[0]).css("backgroundColor","red");
+        $($('.h')[0]).css({"backgroundColor":"blue","color":"white"});
+        let flag = 0;
+        $('#pu').click(function () {
+            if(flag==0){
+                $($('.h')[1]).css("backgroundColor","pink")
+                flag=1;
+                $($('#pu')[0]).attr({value: "恢复"})
+            }else if(flag==1){
+                $($('.h')[1]).css("backgroundColor","white")
+                flag=0;
+                $($('#pu')[0]).attr({value:"pink"});
+            }
+        })
+    });
+</script>
+</body>
+</html>

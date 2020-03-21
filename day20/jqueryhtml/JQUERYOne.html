@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-1.11.0.js"></script>
+</head>
+<body>
+<div class="div1" id="one">1111</div>
+<div class="div2" id="two">222</div>
+<script>
+    var divs = $('div');
+    alert(divs.length);
+    divs[1].innerHTML="<h1>hello</h1>";
+    divs[0].innerHTML="hhh";
+    console.log($('#one')[0]);
+    $('#one')[0].innerText="通过id修改";
+
+    $('div').html("bbbb"+"<h1 align='center' style='color: red'>不用便利</h1>"); //修改所有的div标签的内容，而不用便利
+    console.log($('h1'));
+
+</script>
+</body>
+
+</html>
