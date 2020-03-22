@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>获取属性</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	  <script src="../js/jquery-1.11.0.js"></script>
+	
+	
+	<style type="text/css">
+		 	div,span{
+			    width: 140px;
+			    height: 140px;
+			    margin: 20px;
+			    background: #9999CC;
+			    border: #000 1px solid;
+				float:left;
+			    font-size: 17px;
+			    font-family:Roman;
+			}
+			
+			div.mini{
+			    width: 30px;
+			    height: 30px;
+			    background: #CC66FF;
+			    border: #000 1px solid;
+			    font-size: 12px;
+			    font-family:Roman;
+			}
+			
+			div.visible{
+				display:none;
+			}
+	 </style>
+    
+	<script type="text/javascript">
+		$(function () {
+			//获取北京节点的name属性值
+			$('#bj').prop("name","jjj"); //prop修改失败,这是个什么失败呢？attr获取的name并没有改变，但是却改变了prop获取的name
+			console.log($('#bj').attr('name'));
+			console.log("prop获取属性值"+$('#bj').prop('name'));
+
+			//设置北京节点的name属性的值为dabeijing
+			console.log($('#bj').attr({name: "北京"}));
+			//新增北京节点的discription属性 属性值是didu
+			$('#bj').attr("discription","didu")
+			//删除北京节点的name属性并检验name属性是否存在
+			if(typeof ($('#bj').attr("name"))=="undefined"){
+				console.log("false");
+			}else {
+				window.console.log("true");
+			}
+			$('#bj').removeAttr("name");
+			//获得hobby的的选中状态
+			// $('#hobby').prop({checked:true})
+			$('#hobby').attr({checked:false});
+			$('#hobby').prop("checked",true);
+			alert($('#hobby').attr("checked"));//attr 不会返回固有的属性值，但是它依然可以修改
+			alert($('#hobby').prop('checked'));
+			/*
+			* * attr和prop区别？
+                1. 如果操作的是元素的固有属性，则建议使用prop
+                2. 如果操作的是元素自定义的属性，则建议使用attr
+            */
+		})
+		
+		
+	</script>
+	
+	
+	</head>
+	 
+	<body>
+				
+		 <ul>
+		 	 <li id="bj" name="beijing" xxx="yyy">北京</li>
+			 <li id="tj" name="tianjin">天津</li>
+		 </ul>
+		 <input type="checkbox" id="hobby"/>
+		 
+		
+	</body>
+	
+	
+   
+</html>
+
+
+
