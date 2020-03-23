@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>遍历</title>
+    <script src="../js/jquery-1.11.0.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('body').css('backgroundColor','#D0D0D0');
+            $('li').each(function (i,element) {//两个参数
+                console.log(i);  //角标
+                console.log($(this).text());   //this是dom对象
+                console.log(this);
+            });
+            console.log('第二种方式');
+            $.each($('li'),function (index,ele) {
+                console.log(index+"  "+ele.innerHTML);
+            });
+            console.log('>-------------------------------');
+
+        })
+    </script>
+</head>
+<body>
+<ul id="city">
+    <li>北京</li>
+    <li>上海</li>
+    <li>天津</li>
+    <li>重庆</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>绑定事件</title>
+    <style>
+        html,body{
+            /*overflow: hidden;*/
+            /*margin: 8px;*/
+        }
+        #dd{
+            font-size: larger;
+            color: black;
+            font-family: Arial,Monaco,"French Script MT","Microsoft Tai Le","Fira Code Light";
+            margin: 0;
+            text-align: center;
+        }
+        #dd p{
+            display: inline;
+            line-height: 300px;
+            font-family: Arial,Monaco,"French Script MT","Microsoft Tai Le","Fira Code Light","Arial Black","Droid Sans";
+        }
+        #showDiv{
+            /*visibility: hidden;*/
+        }
+        #ono,.onon{
+            width: 200px;
+            height: 200px;
+            clear: left;
+            background-color: #CC66FF;
+            margin: 30px;
+        }
+        #boff,#bon,#btoggle{
+            margin: 4px;
+        }
+    </style>
+    <script src="../js/jquery-1.11.0.js"></script>
+<!--    引入事件切换插件-->
+    <script src="../js/jquery-migrate-1.0.0.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#showDiv").hide();
+            $('#fa').mouseenter(function () {//事件的链式绑定
+                $('#showDiv').slideDown(700);
+            }).mouseleave(function () {
+                $('#showDiv').stop(true);
+                $('#showDiv').slideUp(350);
+            });
+            $('#bon').on('click',function () {//on方法
+                $('#ono').fadeToggle('normal','swing')
+            });
+            $('#boff').on('click',function () {
+                $('#bon').off('click');
+            });
+            //toggle事件切换 需要借助插件
+            $('#btoggle').toggle(function () {
+                $('#ono').css('backgroundColor','red');
+            },function () {
+                $('#ono').css({'backgroundColor':'pink'})
+            });
+            $('#name').focus(function () {
+
+            });
+        })
+    </script>
+</head>
+<body>
+<input type="button" value="on方法" id="bon">
+<input type="button" value="取消on方法" id="boff">
+<input type="button" value="事件切换" id="btoggle">
+<div>
+<input id="name" type="text" value="绑定点击事件">
+</div>
+<div id="fa" style="border: aquamarine 5px solid;display: inline-block;">
+<div id="showDiv" style="width:300px;height:300px;background:rgba(123,123,123,0.62);position: absolute;border: #CC66FF 2px solid">
+    <div id="dd">
+        <p>但行好事，莫问前程</p>
+    </div>
+</div>
+<div id="showD" style="width:300px;height:300px;background:#fff4fb;border: red 2px dashed;">
+    <div style="border: black 2px solid;width: 20px;height: 30px;background-color: black">1245</div>
+</div>
+</div>
+<div class="onon" id="ono">
+
+</div>
+</body>
+</html>
