@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajaxOne</title>
+    <script src="jquery版本/jquery-1.11.0.js"></script>
+    <script>
+        function doDo() {
+            $.ajax({
+                url:"ServletAJAXDemo",
+                type:"POST",
+                data:{"username":"jack","age":12},
+                success:function (dd) {
+                    alert(dd);
+                },
+                error:function () {
+                    alert("出错了");
+                },
+                dataType:"text"
+            })
+        }
+    </script>
+</head>
+<body>
+<input type="button"  value="请点击" onclick="doDo()" >
+<input >
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajaxTwoPost</title>
+    <script src="jquery版本/jquery-1.11.0.js"></script>
+    <script>
+        function pFun() {
+            $.post("ServletAJAXDemo",{"tehod":"post","username":"pus"},function (data) {
+                alert(data);
+            },"text")
+        }
+    </script>
+</head>
+<body>
+<input type="button" onclick="pFun()" value="请点击">
+</body>
+</html>

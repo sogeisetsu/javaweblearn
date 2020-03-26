@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonDemo</title>
+    <script src="jquery版本/jquery-1.11.0.js"></script>
+    <script>
+
+        let pp ={"name":"alx","age":12,"sex":"man"};
+        // alert(pp.age);
+        // alert(pp);
+        let pps={"pps":[
+                {"name":"alx","age":12,"sex":"man"},
+                {"name":"alx","age":12,"sex":"man"},
+                {"name":"alx","age":12,"sex":"man"}],
+            "count":3
+        };
+        // alert(pps.pps[1].name)
+        for(let key in pps){
+            alert(pps[key]);
+            // alert(pps.key);  这样获取不了json内容因为相当于pps."pps"
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

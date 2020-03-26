@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FindUser</title>
+    <script src="jquery版本/jquery-1.11.0.js"></script>
+    <script>
+        $(function () {
+            $('#username').blur(function () {
+                let username = $(this).val();
+                $.post("ServletFindUser",{"username":username},function (data) {
+                    console.log(data);
+                    if(data.username_exist=="true"){
+                        $('#s_username').css({"color":"green"});
+                        $('#s_username').text("用户名符合规范");
+                    }else if (data.username_exist=="false"){
+                        $('#s_username').css({"color":"red"});
+                        $('#s_username').text("该用户名已被注册，请换一个");
+                    }else{
+                        $('#s_username').css({"color":"red"});
+                        $('#s_username').text("请输入用户名");
+                    }
+                },"json")
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="text" placeholder="用户名" id="username" >
+<span id="s_username"></span>
+<br>
+<input type="password" placeholder="密码" id="password">
+<span id="s_password"></span>
+<br>
+
+</body>
+</html>

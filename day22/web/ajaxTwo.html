@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajaxTwo</title>
+    <script src="jquery版本/jquery-1.11.0.js"></script>
+    <script>
+        function fun() {
+            $.get("ServletAJAXDemo",{"username":'tom',"age":20},function (data) {
+                alert(data)
+            },"text")
+        }
+    </script>
+</head>
+<body>
+<input type="button" onclick="fun()" value="请点击">
+</body>
+</html>
