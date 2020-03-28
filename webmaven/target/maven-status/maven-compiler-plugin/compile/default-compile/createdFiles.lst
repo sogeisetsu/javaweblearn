@@ -1,0 +1,8 @@
+tk\suyuesheng\util\DataBaseConnection.class
+tk\suyuesheng\service\IUserService.class
+tk\suyuesheng\servlet\ServletOne.class
+tk\suyuesheng\dao\impl\UserDaoImpl.class
+tk\suyuesheng\util\fectory\DomainFectory.class
+tk\suyuesheng\service\impl\UserServiceImpl.class
+tk\suyuesheng\dao\IUserDao.class
+tk\suyuesheng\domain\User.class
