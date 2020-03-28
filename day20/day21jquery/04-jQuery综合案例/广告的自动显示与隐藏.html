@@ -12,24 +12,24 @@
     <script src="../../js/jquery-1.11.0.js"></script>
 
     <script>
-        // $(function () {
-        //     setTimeout(bondAdd,300);
-        //     setTimeout(bondHide,3000);
-        // });
-        // function bondAdd() {
-        //     $('#ad').slideDown('slow','swing',function () {
-        //         console.log('图片进来');
-        //     })
-        // }
-        // function bondHide() {
-        //     $('#ad').hide('fast','swing',function () {
-        //         console.log('图片走开');
-        //     })
-        // }
-        //使用另一种方法
         $(function () {
-            $('#ad').delay(1500).show(500).delay(2500).hide('slow');
-        })
+            setTimeout(bondAdd,300);
+            setTimeout(bondHide,3000);
+        });
+        function bondAdd() {
+            $('#ad').slideDown('slow','swing',function () {
+                console.log('图片进来');
+            });
+        }
+        function bondHide() {
+            $('#ad').hide('fast','swing',function () {
+                console.log('图片走开');
+            })
+        }
+        // //使用另一种方法
+        // $(function () {
+        //     $('#ad').delay(1500).show(500).delay(2500).hide('slow');
+        // })
     </script>
 </head>
 <body>
