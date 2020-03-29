@@ -25,7 +25,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
-      <scope>test</scope>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -61,6 +61,34 @@
       <artifactId>jedis</artifactId>
       <version>2.10.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>2.3</version>
+    </dependency>
+<!--    org.slf4j.impl.StaticLoggerBinder错误-->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+<!--    jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.3.1</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -76,6 +104,9 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+            <encoding>utf-8</encoding>
+          </configuration>
         </plugin>
 <!--        <plugin>-->
 <!--          <artifactId>maven-compiler-plugin</artifactId>-->
@@ -85,7 +116,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.5</version>
           <configuration>
-            <argLine>-Dfile.encoding=UTF-8</argLine>
+            <argLine>-Dfile.encoding=gb2312</argLine>
           </configuration>
         </plugin>
         <plugin>
@@ -107,6 +138,7 @@
           <version>2.2</version>
           <configuration>
             <port>${maven.tomcat7.port}</port>
+            <uriEncoding>utf-8</uriEncoding>
           </configuration>
         </plugin>
 <!--        jdk 配置-->

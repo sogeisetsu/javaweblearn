@@ -7,7 +7,9 @@ import tk.suyuesheng.domain.User;
 import tk.suyuesheng.util.DataBaseConnection;
 import tk.suyuesheng.util.fectory.DomainFectory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TestOne {
     public static void main(String[] args) {
@@ -40,6 +42,16 @@ public class TestOne {
         }
         for (User user : users) {
             System.out.println(user.getName());
+        }
+
+    }
+    @Test
+    public void testmap(){
+        Map<String,String> mm =new HashMap<String, String>();
+        mm.put("name", "ss");
+        mm.put("age","15");
+        for(Map.Entry<String,String> m : mm.entrySet()){
+            System.out.println(m);
         }
     }
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            $.post("ServletOp",{},function (data) {
+                console.log(data);
+                console.log($(data));
+                $(data).each(function (i,element) {
+                    $('#opqu').after("<option>"+this.name+"</option>")
+                    console.log(this.name);
+                    console.log(element);
+                })
+            },"json")
+        })
+    </script>
+</head>
+<body>
+<select>
+    <option id="opqu">请选择</option>
+</select>
+</body>
+</html>
