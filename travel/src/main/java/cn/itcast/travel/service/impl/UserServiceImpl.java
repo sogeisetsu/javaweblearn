@@ -17,26 +17,17 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean regist(User user) {
-        //1.根据用户名查询用户对象
-        User u = userDao.findByUsername(user.getUsername());
-        //判断u是否为null
-        if(u != null){
-            //用户名存在，注册失败
+        //看用户是否存在
+        User byUsername = userDao.findByUsername(user.getUsername());
+        if(byUsername!=null){
             return false;
         }
-        //2.保存用户信息
-        //2.1设置激活码，唯一字符串
         user.setCode(UuidUtil.getUuid());
-        //2.2设置激活状态
-        user.setStatus("N");
+        user.setStatus("n");
+        //发送邮件
+        String content = "<h1>欢迎注册</h1><hr><a href=\"http://localhost/travel/activeUserServlet?code="+user.getCode()+"\"> 请点击注册,您的注册码为"+user.getCode()+"</a><p>如有问题，请联系客服。</p><hr><p>如此邮件和您无关，请忽略该邮件，抱歉</p>";
+        MailUtils.sendMail(user.getEmail(), content, "验证邮件");
         userDao.save(user);
-
-        //3.激活邮件发送，邮件正文？
-
-        String content="<a href='http://localhost/travel/activeUserServlet?code="+user.getCode()+"'>点击激活【黑马旅游网】</a>";
-
-        MailUtils.sendMail(user.getEmail(),content,"激活邮件");
-
         return true;
     }
 

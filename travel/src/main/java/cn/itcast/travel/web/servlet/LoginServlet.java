@@ -19,50 +19,42 @@ import java.util.Map;
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1.获取用户名和密码数据
+        //根据获取信息封装成user
         Map<String, String[]> map = request.getParameterMap();
-        //2.封装User对象
-        User user = new User();
+        User u = new User();
         try {
-            BeanUtils.populate(user,map);
+            BeanUtils.populate(u, map);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+
+
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
-        //3.调用Service查询
-        UserService service = new UserServiceImpl();
-        User u  = service.login(user);
-
-        ResultInfo info = new ResultInfo();
-
-        //4.判断用户对象是否为null
-        if(u == null){
-            //用户名密码或错误
-            info.setFlag(false);
-            info.setErrorMsg("用户名密码或错误");
+        UserServiceImpl userService = new UserServiceImpl();
+        //进行登录操作，数据库返回user
+        User login = userService.login(u);
+        ResultInfo resultInfo = new ResultInfo();
+        if(login==null){
+            //如果login为空
+            resultInfo.setFlag(false);
+            resultInfo.setErrorMsg("用户名或者密码错误");
+        }else {
+            if("y".equalsIgnoreCase(login.getStatus())){
+                //如果user的status为y。说明用户已经激活
+                resultInfo.setFlag(true);
+            }else if ("n".equalsIgnoreCase(login.getStatus())){
+                //如果n，说明用户还没有激活
+                resultInfo.setFlag(false);
+                resultInfo.setErrorMsg("未激活");
+            }
         }
-        //5.判断用户是否激活
-        if(u != null && !"Y".equals(u.getStatus())){
-            //用户尚未激活
-            info.setFlag(false);
-            info.setErrorMsg("您尚未激活，请激活");
-        }
-        //6.判断登录成功
-        if(u != null && "Y".equals(u.getStatus())){
-            request.getSession().setAttribute("user",u);//登录成功标记
-
-            //登录成功
-            info.setFlag(true);
-        }
-
-        //响应数据
+        //封装json
         ObjectMapper mapper = new ObjectMapper();
-
+        String json = mapper.writeValueAsString(resultInfo);
+        //定义reponse的类型和编码
         response.setContentType("application/json;charset=utf-8");
-        mapper.writeValue(response.getOutputStream(),info);
-
+        //将json写入输出流
+        response.getWriter().write(json);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
