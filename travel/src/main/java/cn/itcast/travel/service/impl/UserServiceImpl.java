@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
         user.setCode(UuidUtil.getUuid());
         user.setStatus("n");
         //发送邮件
-        String content = "<h1>欢迎注册</h1><hr><a href=\"http://localhost/travel/activeUserServlet?code="+user.getCode()+"\"> 请点击注册,您的注册码为"+user.getCode()+"</a><p>如有问题，请联系客服。</p><hr><p>如此邮件和您无关，请忽略该邮件，抱歉</p>";
+        String content = "<h1>欢迎注册</h1><hr><a href=\"http://localhost/travel/user/activeUser?code="+user.getCode()+"\"> 请点击注册,您的注册码为"+user.getCode()+"</a><p>如有问题，请联系客服。</p><hr><p>如此邮件和您无关，请忽略该邮件，抱歉</p>";
         MailUtils.sendMail(user.getEmail(), content, "验证邮件");
         userDao.save(user);
         return true;
