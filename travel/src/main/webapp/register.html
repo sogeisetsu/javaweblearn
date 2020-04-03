@@ -87,7 +87,7 @@
 					if(checkPassword()&&checkUsername()&&checkEmail()){
 						$('#errorMsg').text("登陆中》》》》请勿做其他操作……")
 						$('#registerForm').attr({disabled:true});
-						$.post("registUserServlet",$(this).serialize(),function (data) {
+						$.post("user/regist",$(this).serialize(),function (data) {
 							console.log(data);
 							if(data.flag){
 								$(location).attr({href:"register_ok.html"})
