@@ -129,7 +129,7 @@ public class UserServlet extends BaseServlet {
      * @param response
      * @throws IOException
      */
-    public void findeOne(HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public void findOne(HttpServletRequest request,HttpServletResponse response) throws IOException{
         //从session中获取登录用户
         Object user = request.getSession().getAttribute("user");
         //将user写回客户端
