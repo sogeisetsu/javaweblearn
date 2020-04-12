@@ -9,15 +9,22 @@
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" href="css/search.css">
     <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/getParameter.js"></script>
+
     <script>
         $(function () {
             var search = location.search;
-            var string = search.split("=")[1];
-            console.log(string);
-            load(string)
+            // var cid = search.split("=")[1];
+            // load(cid)
+            var cid = getParameter('cid');
+            var rname = getParameter('rname');
+            if(rname){
+                rname=window.decodeURIComponent(rname);
+            }
+            load(cid,null,rname);
         });
-        function load(cid,currentPage) {
-            $.get("route/pageQuery",{cid:cid,currentPage:currentPage},function (data) {
+        function load(cid,currentPage,rname) {
+            $.get("route/pageQuery",{cid:cid,currentPage:currentPage,rname:rname},function (data) {
                 $('#totalCount').text(data.totalCount);
                 $('#totalPage').text(data.totalPage);
                 /*          <li><a href="">首页</a></li>
@@ -36,12 +43,12 @@
                             <li class="threeword"><a href="javascript:;">末页</a></li>*/
                 let lis='';
                 console.log("hhh");
-                let firstPage='<li onclick="load('+cid+')" class="hand"><a href="javascript:void(0)">首页</a></li>';
+                let firstPage='<li onclick="load('+cid+',1,\''+rname+'\')" class="hand"><a href="javascript:void(0)">首页</a></li>';
                 var bb = data.currentPage-1;
                 if(bb<=0){
                     bb=1
                 }
-                let beforePage='<li class="threeword" onclick="load('+cid+','+bb+')"><a href="javascript:void(0)">上一页</a></li>';
+                let beforePage='<li class="threeword" onclick="load('+cid+','+bb+',\''+rname+'\')"><a href="javascript:void(0)">上一页</a></li>';
                 lis+=firstPage;
                 lis+=beforePage;
                 var start=1;
@@ -64,9 +71,9 @@
                 for (let i=start;i<=end;i++){
                     let li;
                     if(data.currentPage==i){
-                        li = '<li onclick="load('+cid+','+i+')" class="hand curPage" ><a href="javascript:void(0)">'+i+'</a></li>';
+                        li = '<li onclick="load('+cid+','+i+',\''+rname+'\')" class="hand curPage" ><a href="javascript:void(0)">'+i+'</a></li>';
                     }else {
-                        li = '<li onclick="load('+cid+','+i+')" class="hand"><a href="javascript:void(0)">'+i+'</a></li>';
+                        li = '<li onclick="load('+cid+','+i+',\''+rname+'\')" class="hand"><a href="javascript:void(0)">'+i+'</a></li>';
                     }
                     lis+=li;
                 }
@@ -74,8 +81,8 @@
                 if(np>=data.totalPage){
                     np=data.totalPage;
                 }
-                let nextPage=' <li class="threeword" onclick="load('+cid+','+np+')"><a href="javascript:void(0);">下一页</a></li>';
-                let lastPage='<li class="threeword hand" onclick="load('+cid+','+data.totalPage+')"><a href="javascript:;">末页</a></li>';
+                let nextPage=' <li class="threeword" onclick="load('+cid+','+np+',\''+rname+'\')"><a href="javascript:void(0);">下一页</a></li>';
+                let lastPage='<li class="threeword hand" onclick="load('+cid+','+data.totalPage+',\''+rname+'\')"><a href="javascript:;">末页</a></li>';
                 lis+=nextPage;
                 lis+=lastPage;
                 $('#pageNum').html(lis);
@@ -122,7 +129,7 @@
                     route_lis+=route_li;
                 }
                 $('#routeList').html(route_lis);
-                window.scrollTo(0,0);
+                window.scrollTo(0,0);//跳转到最上边
             })
         }
     </script>

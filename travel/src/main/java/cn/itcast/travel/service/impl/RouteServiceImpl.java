@@ -11,11 +11,11 @@ import java.util.List;
 public class RouteServiceImpl implements RouteService {
     private RouteDao routeDao = new RouteDaoImpl();
     @Override
-    public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize) {
+    public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize,String rname) {
         PageBean<Route> pageBean = new PageBean<Route>();
-        int totalCount = routeDao.count(cid);//总计数
+        int totalCount = routeDao.count(cid,rname);//总计数
         int start = (currentPage-1)*pageSize;
-        List<Route> byPage = routeDao.findByPage(cid, start, pageSize);
+        List<Route> byPage = routeDao.findByPage(cid, start, pageSize,rname);
         pageBean.setCurrentPage(currentPage);
         pageBean.setList(byPage);
         pageBean.setPageSize(pageSize);
