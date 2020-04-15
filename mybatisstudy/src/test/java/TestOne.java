@@ -6,5 +6,6 @@ public class TestOne {
     @Test
     public void Testv(){
         JdbcTemplate template = JDBCUT.getTemplate();
+
     }
 }
