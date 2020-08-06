@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="mybatis.suyuesheng.properties"/>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!--        开启全局缓存，其实是默认开启-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <typeAlias type="suyuesheng.xinsheng.pojo.User" alias="User"/>
+        <package name="suyuesheng.xinsheng.pojo"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="suyuesheng/xinsheng/dao/UserMapper.xml"/>
+    </mappers>
+</configuration>
